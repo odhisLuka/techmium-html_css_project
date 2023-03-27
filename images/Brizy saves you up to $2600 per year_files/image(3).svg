@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="46" height="46" viewBox="0 0 46 46">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.047" y1="-0.216" x2="1.029" y2="1.171" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#7bd8fe"/>
+      <stop offset="1" stop-color="#3d3ac4"/>
+    </linearGradient>
+  </defs>
+  <path id="Combined_Shape_4" data-name="Combined Shape 4" d="M0,46V20.489l8-5.8V0H38V14.69l8,5.8V46Zm2-2H41.079L2,22.685Zm42-.684V22.685L25.088,33ZM23,31.861,36,24.77V2H10V24.77ZM8,23.679v-6.52L2.868,20.88Zm30,0,5.132-2.8L38,17.16ZM16,20V18H30v2Zm0-8V10H30v2Z" fill="url(#linear-gradient)"/>
+</svg>

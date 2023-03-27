@@ -1,0 +1,925 @@
+var brzproducts = {"688275":49,"688295":99,"688302":199,"688309":79,"688313":299,"688316":499,"688319":9,"688322":29,"688326":49,"688331":149,"688336":299,"688339":399,"764626":179,"764628":674,"764629":1349};
+var brzprodefault = {"688275":{"USD":49,"EUR":49,"GBP":39},"688295":{"USD":99,"EUR":99,"GBP":79},"688302":{"USD":199,"EUR":199,"GBP":159},"688331":{"USD":149,"EUR":149,"GBP":119},"688336":{"USD":299,"EUR":299,"GBP":229},"688339":{"USD":399,"EUR":399,"GBP":319},"688309":{"USD":79,"EUR":79,"GBP":65},"688313":{"USD":299,"EUR":299,"GBP":229},"688316":{"USD":499,"EUR":499,"GBP":339},"688319":{"USD":9,"EUR":9,"GBP":7},"688322":{"USD":29,"EUR":29,"GBP":24},"688326":{"USD":49,"EUR":49,"GBP":39},"764626":{"USD":199,"EUR":199,"GBP":149},"764628":{"USD":749,"EUR":749,"GBP":569},"764629":{"USD":1499,"EUR":1499,"GBP":1149}};
+
+//<script type="text/javascript">
+// get currency
+
+var currency = document.querySelectorAll('.brizy-pro-currency span, .brizy-pro-currency strong');
+currency.forEach(function(c) {
+    c.innerHTML = '$0';
+});
+for (var key in brzproducts) {
+    var price = document.querySelectorAll('.brizy-pro-' + key + ' span');
+    price.forEach(function(p) {
+        p.innerHTML = '$' + brzproducts[key] ;
+    });
+
+    price = document.querySelectorAll('.brizy-pro-' + key + ' strong');
+    price.forEach(function(p) {
+        p.innerHTML = '$' + brzproducts[key] + '/year';
+    });
+
+    price = document.querySelectorAll('.brizy-pro-cl-' + key + ' strong');
+    price.forEach(function(p) {
+        p.innerHTML = '$' + brzproducts[key] + ' /mo.';
+    });
+
+    price = document.querySelectorAll('.brizy-pro-' + key + ' s');
+    price.forEach(function(p) {
+        p.innerHTML = '$' + brzprodefault[key]['USD'];
+    });
+}
+
+if (window.dataLayer) {
+    window.dataLayer.push({
+        'event': 'eec.impressionView',
+        'ecommerce': {
+            'currencyCode': 'USD',
+            'impressions': [
+                {
+                    'name': 'Personal WP',
+                    'id': '688275',
+                    'price': '49',
+                    'list': (document.title) ? document.title : 'pricing',
+                    'position': 1
+                },
+                {
+                    'name': 'Freelancer WP',
+                    'id': '688295',
+                    'price': '99',
+                    'list': (document.title) ? document.title : 'pricing',
+                    'position': 2
+                },
+                {
+                    'name': 'Agency WP',
+                    'id': '688302',
+                    'price': '199',
+                    'list': (document.title) ? document.title : 'pricing',
+                    'position': 3
+                }
+            ],
+            'detail': {
+                'actionField': {
+                    'list': (document.title) ? document.title : 'pricing'
+                },
+                'products': [{
+                    'name': 'Personal WP',
+                    'id': '688275',
+                    'price': '49'
+                }]
+            }
+        }
+    });
+}
+
+// Your CSS as text
+var styles = `html.mvc__a.mvc__lot.mvc__of.mvc__classes.mvc__to.mvc__increase.mvc__the.mvc__odds.mvc__of.mvc__winning.mvc__specificity, html.mvc__a.mvc__lot.mvc__of.mvc__classes.mvc__to.mvc__increase.mvc__the.mvc__odds.mvc__of.mvc__winning.mvc__specificity > body {height: 100%;position: static;}}`;
+var styleSheet = document.createElement("style");
+styleSheet.type = "text/css";
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);
+
+function brz_cart_rc(data,cs) {
+var xhr = new XMLHttpRequest();xhr.open('POST', 'https://www.brizy.io/account/bzcart/', true); xhr.setRequestHeader('Accept', 'application/json');xhr.setRequestHeader('Content-Type', 'application/json');
+//xhr.send(JSON.stringify({pid:data.eventData.product.id,prn:data.eventData.product.name,em:data.eventData.user.email,cs:cs,ev:data.event,
+//value:data.eventData.checkout.prices.customer.total,tax:data.eventData.checkout.prices.customer.total_tax,currency:data.eventData.checkout.prices.customer.currency}));
+if (bzuname) {
+    data.eventData.bzuname = bzuname;
+}
+xhr.send(JSON.stringify({evn:data.event,cs:cs,evndata:data.eventData}));
+}
+function brz_forHumans(seconds) {
+    var levels = [
+        [Math.floor(seconds / 31536000), 'y'],
+        [Math.floor((seconds % 31536000) / 86400), 'd'],
+        [Math.floor(((seconds % 31536000) % 86400) / 3600), 'h'],
+        [Math.floor((((seconds % 31536000) % 86400) % 3600) / 60), 'm'],
+        [(((seconds % 31536000) % 86400) % 3600) % 60, 's'],
+    ];
+    var returntext = '';
+    for (var i = 0, max = levels.length; i < max; i++) {
+        if (levels[i][0] === 0 && levels[i][1] != 's') continue;
+        returntext +=  levels[i][0] + levels[i][1];
+    }
+    return returntext.trim();
+}
+
+var PaddleCallback = function() {
+    var cs = [];
+    var ts = Math.round(Date.now() / 1000);
+    Paddle.Setup({vendor: 39320,enableTracking:0,eventCallback: function (data) {
+            console.log(data);
+            var cat;
+            var item_category;
+            var item_category2;
+            var item_list_id;
+            var item_list_name;
+            if (data.eventData.product.id) {
+                cat = brz_pr_category(data.eventData.product.id);
+                item_category = cat.item_category;
+                item_category2 = cat.item_category2;
+                item_list_id = cat.item_list_id;
+                item_list_name = cat.item_list_name;
+            }
+            let tss = brz_forHumans(Math.round(Date.now() / 1000) - ts);
+            ts = Math.round(Date.now() / 1000);
+            if (data.event == 'Checkout.Error') {
+                cs.push(tss+'-'+data.eventData.error);
+            } else {
+                cs.push(tss+'-'+data.event);
+            }
+
+            //if (window.dataLayer) {
+                switch (data.event) {
+                    case 'Checkout.Loaded':
+                        //let bzpopupmodal = document.getElementById('bz-popup-modal');
+                        //if (bzpopupmodal) {bzpopupmodal.remove();}
+                       /*window.dataLayer.push({
+                            'event': 'eec.addToCart',
+                            'ecommerce': {
+                                'currencyCode': data.eventData.checkout.prices.customer.currency,
+                                'add': {
+                                    'actionField': {
+                                        'list': (document.title) ? document.title : 'pricing'
+                                    },
+                                    'products': [{
+                                        'id': data.eventData.product.id,
+                                        'name': data.eventData.product.name,
+                                        'quantity': data.eventData.product.quantity,
+                                        'price': data.eventData.checkout.prices.customer.total,
+                                        'coupon': data.eventData.checkout.coupon.coupon_code
+                                    }]
+                                }
+                            }
+                        });*/
+                        window.dataLayer.push({ ecommerce: null });
+                        window.dataLayer.push({
+                            'event': 'add_to_cart',
+                            'ecommerce': {
+                                'currency': data.eventData.checkout.prices.customer.currency,
+                                'value': data.eventData.checkout.prices.customer.total,
+                                'items': [{
+                                    'item_id': data.eventData.product.id,
+                                    'item_name': data.eventData.product.name,
+                                    'quantity': data.eventData.product.quantity,
+                                    'price': data.eventData.checkout.prices.customer.total,
+                                    'coupon': data.eventData.checkout.coupon.coupon_code,
+                                    'item_category': cat.item_category,
+                                    'item_category2': item_category2,
+                                    'item_list_id': item_list_id,
+                                    'item_list_name': item_list_name
+                                                                    }]
+                            }
+                        });
+                        brz_cart_rc(data,cs);
+                        break;
+                    case 'Checkout.Close':
+                        /*window.dataLayer.push({
+                            'event': 'eec.removeFromCart',
+                            'ecommerce': {
+                                'remove': {
+                                    'actionField': {
+                                        'list': (document.title) ? document.title : 'pricing'
+                                    },
+                                    'products': [{
+                                        'id': data.eventData.product.id,
+                                        'name': data.eventData.product.name,
+                                        'quantity': data.eventData.product.quantity,
+                                        'price': data.eventData.checkout.prices.customer.total
+                                    }]
+                                }
+                            }
+                        });*/
+                        window.dataLayer.push({ ecommerce: null });
+                        window.dataLayer.push({
+                            'event': 'remove_from_cart',
+                            'ecommerce': {
+                                'currency': data.eventData.checkout.prices.customer.currency,
+                                'value': data.eventData.checkout.prices.customer.total,
+                                'items': [{
+                                    'item_id': data.eventData.product.id,
+                                    'item_name': data.eventData.product.name,
+                                    'quantity': data.eventData.product.quantity,
+                                    'price': data.eventData.checkout.prices.customer.total,
+                                    'coupon': data.eventData.checkout.coupon.coupon_code,
+                                    'item_category': item_category,
+                                    'item_category2': item_category2,
+                                    'item_list_id': item_list_id,
+                                    'item_list_name': item_list_name
+                                                                    }]
+                            }
+                        });
+                        if (data.eventData.checkout.completed) {
+                            var bzcheckout = btoa(JSON.stringify(data.eventData.checkout));
+                            window.setTimeout(function(){window.location.href='https://www.brizy.io/account/thanks?bzcheckout='+bzcheckout;}, 3000);
+                        } else {
+                            var bzcheckout = btoa(JSON.stringify(data.eventData));
+                                                    }
+                        //brz_cart_rc(data,cs);
+                        break;
+                    case 'Checkout.Login':
+                        brz_cart_rc(data,cs);
+                        break;
+                    case 'Checkout.Location.Submit':
+                        /*window.dataLayer.push({
+                            'event': 'eec.checkout',
+                            'ecommerce': {
+                                'checkout': {
+                                    'actionField': {
+                                        'step': 1
+                                    },
+                                    'products': [{
+                                        'id': data.eventData.product.id,
+                                        'name': data.eventData.product.name,
+                                        'quantity': data.eventData.product.quantity,
+                                        'price': data.eventData.checkout.prices.customer.total,
+                                        'coupon': data.eventData.checkout.coupon.coupon_code
+                                    }]
+                                }
+                            }
+                        });*/
+                        window.dataLayer.push({ ecommerce: null });
+                        window.dataLayer.push({
+                            'event': 'begin_checkout',
+                            'ecommerce': {
+                                'currency': data.eventData.checkout.prices.customer.currency,
+                                'value': data.eventData.checkout.prices.customer.total,
+                                'coupon': data.eventData.checkout.coupon.coupon_code,
+                                'items': [{
+                                    'item_id': data.eventData.product.id,
+                                    'item_name': data.eventData.product.name,
+                                    'quantity': data.eventData.product.quantity,
+                                    'price': data.eventData.checkout.prices.customer.total,
+                                    'item_category': item_category,
+                                    'item_category2': item_category2,
+                                    'item_list_id': item_list_id,
+                                    'item_list_name': item_list_name
+                                                                    }]
+                            }
+                        });
+                        //sendinblue.identify(data.eventData.user.email);
+                        break;
+                    case 'Checkout.Coupon.Submit':
+                        window.dataLayer.push({ ecommerce: null });
+                        window.dataLayer.push({
+                            'event': 'submit_coupon',
+                            'ecommerce': {
+                                'currency': data.eventData.checkout.prices.customer.currency,
+                                'value': data.eventData.checkout.prices.customer.total,
+                                'coupon': data.eventData.coupon.coupon_code,
+                                'items': [{
+                                    'item_id': data.eventData.product.id,
+                                    'item_name': data.eventData.product.name,
+                                    'quantity': data.eventData.product.quantity,
+                                    'price': data.eventData.checkout.prices.customer.total,
+                                    'item_category': item_category,
+                                    'item_category2': item_category2,
+                                    'item_list_id': item_list_id,
+                                    'item_list_name': item_list_name
+                                                                    }]
+                            }
+                        });
+                        break;
+                    case 'Checkout.Coupon.Applied':
+                        window.dataLayer.push({ ecommerce: null });
+                        window.dataLayer.push({
+                            'event': 'applied_coupon',
+                            'ecommerce': {
+                                'currency': data.eventData.checkout.prices.customer.currency,
+                                'value': data.eventData.checkout.prices.customer.total,
+                                'coupon': data.eventData.coupon.coupon_code,
+                                'items': [{
+                                    'item_id': data.eventData.product.id,
+                                    'item_name': data.eventData.product.name,
+                                    'quantity': data.eventData.product.quantity,
+                                    'price': data.eventData.checkout.prices.customer.total,
+                                    'item_category': item_category,
+                                    'item_category2': item_category2,
+                                    'item_list_id': item_list_id,
+                                    'item_list_name': item_list_name
+                                                                    }]
+                            }
+                        });
+                        break;
+                    case 'Checkout.Vat.Submit':
+                        window.dataLayer.push({ ecommerce: null });
+                        window.dataLayer.push({
+                            'event': 'submit_vat',
+                            'ecommerce': {
+                                'currency': data.eventData.checkout.prices.customer.currency,
+                                'value': data.eventData.checkout.prices.customer.total,
+                                'coupon': data.eventData.checkout.coupon.coupon_code,
+                                'items': [{
+                                    'item_id': data.eventData.product.id,
+                                    'item_name': data.eventData.product.name,
+                                    'quantity': data.eventData.product.quantity,
+                                    'price': data.eventData.checkout.prices.customer.total,
+                                    'item_category': item_category,
+                                    'item_category2': item_category2,
+                                    'item_list_id': item_list_id,
+                                    'item_list_name': item_list_name
+                                                                    }]
+                            }
+                        });
+                        break;
+                    case 'Checkout.Vat.Applied':
+                        window.dataLayer.push({ ecommerce: null });
+                        window.dataLayer.push({
+                            'event': 'applied_vat',
+                            'ecommerce': {
+                                'currency': data.eventData.checkout.prices.customer.currency,
+                                'value': data.eventData.checkout.prices.customer.total,
+                                'coupon': data.eventData.checkout.coupon.coupon_code,
+                                'items': [{
+                                    'item_id': data.eventData.product.id,
+                                    'item_name': data.eventData.product.name,
+                                    'quantity': data.eventData.product.quantity,
+                                    'price': data.eventData.checkout.prices.customer.total,
+                                    'item_category': item_category,
+                                    'item_category2': item_category2,
+                                    'item_list_id': item_list_id,
+                                    'item_list_name': item_list_name
+                                                                    }]
+                            }
+                        });
+                        break;
+                    case 'Checkout.Error':
+                        window.dataLayer.push({ ecommerce: null });
+                        window.dataLayer.push({
+                            'event': 'error_checkout',
+                            'ecommerce': {
+                                'currency': data.eventData.checkout.prices.customer.currency,
+                                'value': data.eventData.checkout.prices.customer.total,
+                                'coupon': data.eventData.checkout.coupon.coupon_code,
+                                'error': data.eventData.error,
+                                'items': [{
+                                    'item_id': data.eventData.product.id,
+                                    'item_name': data.eventData.product.name,
+                                    'quantity': data.eventData.product.quantity,
+                                    'price': data.eventData.checkout.prices.customer.total,
+                                    'item_category': item_category,
+                                    'item_category2': item_category2,
+                                    'item_list_id': item_list_id,
+                                    'item_list_name': item_list_name
+                                                                    }]
+                            }
+                        });
+                        break;
+                    case 'Checkout.PaymentMethodSelected':
+                        /*window.dataLayer.push({
+                            'event': 'eec.checkout',
+                            'ecommerce': {
+                                'checkout': {
+                                    'actionField': {
+                                        'step': 2,
+                                        'option': data.eventData.payment_method
+                                    }
+                                }
+                            }
+                        });*/
+                        window.dataLayer.push({ ecommerce: null });
+                        window.dataLayer.push({
+                            'event': 'add_payment_info',
+                            'ecommerce': {
+                                'currency': data.eventData.checkout.prices.customer.currency,
+                                'value': data.eventData.checkout.prices.customer.total,
+                                'coupon': data.eventData.checkout.coupon.coupon_code,
+                                'payment_type': data.eventData.payment_method,
+                                'items': [{
+                                    'item_id': data.eventData.product.id,
+                                    'item_name': data.eventData.product.name,
+                                    'quantity': data.eventData.product.quantity,
+                                    'price': data.eventData.checkout.prices.customer.total,
+                                    'item_category': item_category,
+                                    'item_category2': item_category2,
+                                    'item_list_id': item_list_id,
+                                    'item_list_name': item_list_name
+                                                                    }]
+                            }
+                        });
+                        break;
+                    case 'Checkout.PaymentComplete':
+                        /*window.dataLayer.push({
+                            'event': 'eec.purchase',
+                            'ecommerce': {
+                                'currencyCode': data.eventData.checkout.prices.customer.currency,
+                                'purchase': {
+                                    'actionField': {
+                                        'id': data.eventData.checkout.id,
+                                        'revenue': data.eventData.checkout.prices.customer.total,
+                                        'tax': data.eventData.checkout.prices.customer.total_tax,
+                                        'coupon': data.eventData.checkout.coupon.coupon_code
+                                    },
+                                    'products': [{
+                                        'id': data.eventData.product.id,
+                                        'name': data.eventData.product.name,
+                                        'quantity': data.eventData.product.quantity,
+                                        'price': data.eventData.checkout.prices.customer.total
+                                    }]
+                                }
+                            }
+                        });*/
+                        window.dataLayer.push({ ecommerce: null });
+                        let bzdata = {
+                            'event': 'purchase',
+                            'ecommerce': {
+                                'currency': data.eventData.checkout.prices.customer.currency,
+                                'value': data.eventData.checkout.prices.customer.total,
+                                'tax': data.eventData.checkout.prices.customer.total_tax,
+                                'transaction_id': data.eventData.checkout.id,
+                                'coupon': data.eventData.checkout.coupon.coupon_code,
+                                'items': [{
+                                    'item_id': data.eventData.product.id,
+                                    'item_name': data.eventData.product.name,
+                                    'quantity': data.eventData.product.quantity,
+                                    'price': data.eventData.checkout.prices.customer.total,
+                                    'item_category': item_category,
+                                    'item_category2': item_category2,
+                                    'item_list_id': item_list_id,
+                                    'item_list_name': item_list_name
+                                }]
+                                                            }
+                        };
+                        let brizycheckout = btoa(JSON.stringify(bzdata));
+                        window.dataLayer.push(bzdata);
+                        bsetCookie('brizycheckout',brizycheckout,0.1);
+                        break;
+                    case 'Checkout.Complete':
+                        brz_cart_rc(data,cs);
+                        if (!data.eventData.flagged) {
+                            var checkoutId = data.eventData.checkout.id;
+                            Paddle.Order.details(checkoutId, function(data) {
+                                var bzcheckout = btoa(JSON.stringify(data));
+                                bsetCookie('bzcheckout',bzcheckout,1);
+                                window.setTimeout(function(){window.location.href='https://www.brizy.io/account/thanks?bzcheckout='+bzcheckout;}, 2000);
+                            });
+                        }
+                        break;
+                }
+            //}
+        }
+    });
+};
+
+(function(w,d,s){var f=d.getElementsByTagName(s)[0],j=d.createElement(s);
+    j.src='https://cdn.paddle.com/paddle/paddle.js';
+    j.onreadystatechange = PaddleCallback;j.onload = PaddleCallback;
+    f.parentNode.insertBefore(j,f);
+})(window,document,'script');
+var bzuname;
+
+/*
+var paddle_buy_buttons = document.querySelectorAll('.paddle_buy_button a, .paddle_buy_button');
+paddle_buy_buttons.forEach(function(b) {
+    b.addEventListener('click', function(e){openBrizyPaddleCheckout(e, this);}, false);
+});
+*/
+
+function brzAddToCart() {
+    var paddle_buy_buttons = document.querySelectorAll('.paddle_buy_button');
+    var item_list_id;
+    paddle_buy_buttons.forEach(function(button) {
+        var bounding = button.getBoundingClientRect();
+        var pid = button.getAttribute('href').substring(1);
+        if (bounding.top > 0 && bounding.left > 0 && bounding.right > 0 && bounding.bottom > 0) {
+            var newHandler = function(e) { brizyOpenCart(e, this); e.stopImmediatePropagation(); };
+            button.addEventListener('click', newHandler, false);
+            var cat = brz_pr_category(pid);
+            item_list_id = cat.item_list_id;
+        }
+    });
+    if (item_list_id) {
+        window[item_list_id]();
+    }
+}
+
+brzAddToCart();
+document.querySelectorAll('.brz-switcher__nav').forEach(function(switcher) {
+    switcher.addEventListener('click', function(e) { brzAddToCart(); }, false);
+});
+
+function bsetCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function checkoutComplete(data) {
+    var bzcheckout = btoa(JSON.stringify(data));
+    bsetCookie('bzcheckout',bzcheckout,1);
+    setTimeout(function(){
+        window.location.href='https://www.brizy.io/account/thanks?bzcheckout='+bzcheckout;
+    }, 3*1000);
+}
+
+function brizyOpenCart(e,paddle_buy_button) {
+    e.preventDefault();
+    var html = [
+        '<style>',
+        '.bz-modal {z-index:99999;display:none;position:fixed;margin:0px;padding:0px;left:0px;top:0px;width:100%;height:100%;line-height:1.15;font-size:10px;-webkit-font-smoothing:antialiased;font-family:Lato,"Helvetica Neue",HelveticaNeue,Helvetica,Arial,sans-serif;}',
+        '.bz-modal.on {display: block;}',
+        '#marketingConsent.on {background-color: rgb(0, 150, 255);}',
+        '.modal-dialog {margin:100px auto;width:340px;border-radius:0.3em;position:relative;box-shadow:rgb(0 0 0 / 18%) 0px 2px 8px;background:rgb(255, 255, 255);}',
+        '.brizy-logo-lq {width:95px;height:95px;display:block;border-radius:3px;margin:0px auto;position:absolute;top:-55px;left:0px;right:0px;z-index:150;}',
+        '#bz-modal-js-overlay {background:rgba(48, 47, 60, 0.8);position:fixed;top:0px;width:100%;height:100%;z-index:20000;left:0px;}',
+        '</style>',
+        '<div class="bz-modal fade on" id="bz-modal" role="dialog">',
+        '   <div class="modal-dialog">',
+        '   <div style="border-bottom:1px solid rgb(217, 217, 217);padding:1.2em;border-radius:0;">',
+        '       <img src="https://www.brizy.io/paddle/logo-brizy.png" alt="Brizy Website builder" class="brizy-logo-lq">',
+        '       <div style="padding-top:4.5em;text-align:center;">',
+        '           <div style="color:rgb(43, 42, 53);padding-bottom:1em;">',
+        '               <span style="font-weight:400;font-size:2em;">Purchase </span> ',
+        '               <span style="font-weight:700;font-size:2em;" id="bz-cart-item-name">Brizy PRO</span>',
+        '           </div>',
+        '       </div>',
+        '       <button id="bz-modal-js-close" style="cursor:pointer;-webkit-appearance:button;position:absolute;right:9px;top:9px;width:17px;border:none;background:none;padding:2px 0px 0px;border-radius:3px;z-index:160;" onclick="document.getElementById(\'bz-popup-modal\').remove();">',
+        '           <img src="https://buy.paddle.com/images/icons/close.svg" style="width:11px;height:11px;border-style:none;" alt="Close">',
+        '       </button>',
+        '   </div>',
+        '   <div style="height:auto;max-width:none;position:relative;">',
+        '       <div style="padding:1.3em;">',
+        '           <form id="bzopencart" method="post">',
+        '               <div style="margin-bottom:1.2em;">',
+        '                   <div style="border:1px solid rgb(217, 217, 217);border-radius:3px;box-shadow:rgb(210 212 222 / 85%) 0px 0.5px 1.5px;position:relative;width:100%;">',
+        '                       <input type="text" placeholder="Your Name" name="bzuname" required style="border:1px solid transparent;color:rgb(85, 85, 85);font-size:1.4em;font-weight:400;line-height:2.4em;max-width:100%;padding:0px 12px;width:100%;border-radius:3px;min-height:40px;">',
+        '                   </div>',
+        '               </div>',
+        '               <div style="margin-bottom:1.2em;">',
+        '                   <div style="border:1px solid rgb(217, 217, 217);border-radius:3px;box-shadow:rgb(210 212 222 / 85%) 0px 0.5px 1.5px;position:relative;width:100%;">',
+        '                       <input type="email" placeholder="Email Address" name="email" required style="border:1px solid transparent;color:rgb(85, 85, 85);font-size:1.4em;font-weight:400;line-height:2.4em;max-width:100%;padding:0px 12px;width:100%;border-radius:3px;min-height:40px;">',
+        '                   </div>',
+        '               </div>',
+        '               <div id="marketingConsentWrapper" style="display:flex;justify-content:flex-end;-webkit-box-pack:end;margin-bottom:1.9em">',
+        '                   <div width="100%" style="background-color:transparent;border:none rgb(235, 236, 240);border-radius:4px;height:auto;padding:0px;text-align:left;width:100%;">',
+        '                       <div style="display:flex;">',
+        '                           <div style="margin-top:0px;">',
+        '                               <input type="checkbox" name="marketingConsent" style="height:0px;left:0px;margin:0px;position:absolute;top:0px;width:0px;box-sizing:border-box;line-height:1.15;" value="1"/>',
+        '                               <span id="marketingConsent" height="1.2em" width="1.2em" style="border:1px solid rgb(157, 157, 157);border-radius:2px;box-sizing:border-box;box-shadow:none;display:inline-block;height:1.2em;width:1.2em;cursor:pointer;">',
+        '                                   <svg fill="none" height="1.2em" viewBox="1 1.25 11 11" width="1.2em" xmlns="http://www.w3.org/2000/svg" style="position:absolute;"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.71401 4.70022L5.08389 9.42113L1.79297 6.1302L3.20718 4.71598L5.0701 6.5789L8.28613 3.2998L9.71401 4.70022Z" fill="#FFFFFF"></path></svg>',
+        '                               </span>',
+        '                           </div>',
+        '                           <div>',
+        '                               <label style="padding-left:1em;font-size:1.5em;font-weight:400;white-space:normal;display:inline-block;color: rgb(85, 85, 85);">',
+        '                                   <var style="font-style:italic;">ProWebCraft LTD</var> may send me product updates and offers via email. It is possible to opt-out at any time.',
+        '                               </label>',
+        '                           </div>',
+        '                       </div>',
+        '                   </div>',
+        '               </div>',
+        '               <div style="text-align:center;">',
+        '                   <div style="font-size:10px">',
+        '                       <button type="submit" style="background-color:rgb(5, 179, 230);border-color:rgb(5, 179, 230);border-style:solid;border-radius:4px;border-width:1px;color:rgb(255, 255, 255);cursor:pointer;box-sizing:border-box;box-shadow:none;line-height:20px;height:44px;margin-bottom:auto;min-height:auto;padding:0px;font-size:1.7em;text-align:center;font-weight:700;font-family:inherit;width:100%;background-position:center center !important;">Continue »</button>',
+        '                   </div>',
+        '               </div>',
+        '           </form>',
+        '       </div>',
+        '   </div>',
+        '   </div>',
+        '</div>',
+        '<div id="bz-modal-js-overlay"></div>',
+    ].join("\n");
+    var bzpopup = document.createElement('div');
+    bzpopup.id = 'bz-popup-modal';
+    bzpopup.innerHTML = html;
+    document.body.appendChild(bzpopup);
+
+    var bzopencart = document.getElementById('bzopencart');
+    var marketingConsentWrapper = document.getElementById('marketingConsentWrapper');
+    var marketingConsent = document.getElementById('marketingConsent');
+
+    var pid = paddle_buy_button.getAttribute('href').substring(1);
+    var cat = brz_pr_category(pid);
+    var bzcartitemname = document.getElementById('bz-cart-item-name');
+    bzcartitemname.innerHTML = cat.item_name;
+
+    marketingConsentWrapper.addEventListener('click', function(){
+        var checkboxes = document.getElementsByName('marketingConsent');
+        for (var checkbox of checkboxes) {
+            checkbox.checked = !checkbox.checked;
+            if (checkbox.checked) {
+                marketingConsent.classList.add('on');
+            } else {
+                marketingConsent.classList.remove('on');
+            }
+        }
+    });
+
+    bzopencart.addEventListener('submit', function(evn){
+        evn.preventDefault();
+        let email = bzopencart.elements['email'].value;
+        let marketingConsent = bzopencart.elements['marketingConsent'].checked;
+        marketingConsent = (marketingConsent) ? '1' : '0';
+        bzuname = bzopencart.elements['bzuname'].value;
+        openBrizyPaddleCheckout(e,paddle_buy_button,email,marketingConsent);
+    });
+}
+
+function openBrizyPaddleCheckout(e,paddle_buy_button,email,marketingConsent) {
+    e.preventDefault();
+    var urlParams = new URLSearchParams(window.location.search);
+    var bzprc = urlParams.get('bzprc');
+    var pid = paddle_buy_button.getAttribute('href').substring(1);
+    var pid = pid.split('/checkout/')[1] ? pid.split('/checkout/')[1] : pid;
+    var bzcoupon = null;
+    if (pid.split('coupon=')[1]) {bzcoupon = pid.split('?coupon=')[1];pid = pid.split('?coupon=')[0];}
+    if (bzcoupon === null && bzprc !=null) {bzcoupon = bzprc;}
+    var bzpassthrough = {};
+            bzpassthrough.brizypaddlekey = 'MTA1LjU0LjE1NC4xNzMtVVNELXsiNjg4Mjc1Ijo0OSwiNjg4Mjk1Ijo5OSwiNjg4MzAyIjoxOTksIjY4ODMwOSI6NzksIjY4ODMxMyI6Mjk5LCI2ODgzMTYiOjQ5OSwiNjg4MzE5Ijo5LCI2ODgzMjIiOjI5LCI2ODgzMjYiOjQ5LCI2ODgzMzEiOjE0OSwiNjg4MzM2IjoyOTksIjY4ODMzOSI6Mzk5LCI3NjQ2MjYiOjE3OSwiNzY0NjI4Ijo2NzQsIjc2NDYyOSI6MTM0OX0tS0U=';
+    var country = 'KE';
+    var bzprams = JSON.stringify(bzpassthrough); console.log(bzprams);
+    var doupsell = {};
+
+    
+    //let modal_overlay = document.getElementById('bz-modal-js-overlay');
+    //if (modal_overlay) {modal_overlay.remove();}
+
+    let bzpopupmodal = document.getElementById('bz-popup-modal');
+    if (bzpopupmodal) {bzpopupmodal.remove();}
+
+    if (pid == 688275) {
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgUGVyc29uYWwgV29yZFByZXNzIiwiaSI6Imh0dHBzOlwvXC9wYWRkbGUuczMuYW1hem9uYXdzLmNvbVwvdXNlclwvMzkzMjBcL2J6UjhWcHdpVDBxeHVHWkU3ekY2X2xvZ28tYnJpenkucG5nIiwiciI6bnVsbCwiY20iOiIiLCJyZSI6Im51bGwiLCJwIjo2ODgyNzUsImFsIjowLCJ5IjoiIiwicSI6MCwiZCI6MSwiYSI6W10sInYiOiIzOTMyMCIsInMiOiI5NmU4OWFjNjhkZjAyY2YzZTIwZTc4MTc2MTRjOWY4ZDE3OTQyYTdjYmRhYjc4NDMyNWJlZDg0NDU1MTI0MWRkMGY2OWMwODc3NmVjNDQ3MjE4MWE4MDU2MzdiN2NjN2MxMTFjZmVhNGRkMGVmZDcyNzBiOTE2YmI4NWNhNjMyMCJ9',coupon:bzcoupon,passthrough:bzprams});
+    } else if (pid == 688295) {
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgRnJlZWxhbmNlciBXb3JkUHJlc3MiLCJpIjoiaHR0cHM6XC9cL3BhZGRsZS5zMy5hbWF6b25hd3MuY29tXC91c2VyXC8zOTMyMFwvc3Vic182ODgyOTVfaWNvbi5wbmciLCJyIjpudWxsLCJjbSI6IiIsInJlIjoibnVsbCIsInAiOjY4ODI5NSwiYWwiOjAsInkiOiIiLCJxIjowLCJkIjoxLCJhIjpbXSwidiI6IjM5MzIwIiwicyI6IjNlYWJlOGVlNDI0NTJmNGE1YTE3NDIzM2IyNTRhNzQ4ZDViZWEyM2NlNDVmNTNiYTM5MWQ1ZWQ1ZWMwYzM5NmRkNzhiODFmYzViOGE3OTZiOTY5ZDQ3NGEwNDA2MmY3MWZiMjhhZjQwMjhhY2Y2Yzg0MmEwODY3MGQ3MGE1Yzc4In0=',coupon:bzcoupon,passthrough:bzprams});
+    } else if (pid == 688302) {
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgQWdlbmN5IFdvcmRQcmVzcyIsImkiOiJodHRwczpcL1wvcGFkZGxlLnMzLmFtYXpvbmF3cy5jb21cL3VzZXJcLzM5MzIwXC9zdWJzXzY4ODMwMl9pY29uLnBuZyIsInIiOm51bGwsImNtIjoiIiwicmUiOiJudWxsIiwicCI6Njg4MzAyLCJhbCI6MCwieSI6IiIsInEiOjAsImQiOjEsImEiOltdLCJ2IjoiMzkzMjAiLCJzIjoiYzk5YTQ0Y2NjNWM3OWVlZWJmNjUwMWQ4OWYxZDM5ZWQ5ZjVkNjVmZWVhYzdmODVlMzdlNjkyMDI4N2YwNTViMzI1MDIwNjAzNGI5Nzg3MTMyYTFhMWFlNDE3ODk3ZjZiYzY0MmMyMDFiMzg4YzcwMWQ1YTNhODVjYTMxYzU2YjgifQ==',coupon:bzcoupon,passthrough:bzprams});
+    } else if (pid == 688331) {
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgUGVyc29uYWwgV29yZFByZXNzIiwiaSI6Imh0dHBzOlwvXC9wYWRkbGUuczMuYW1hem9uYXdzLmNvbVwvdXNlclwvMzkzMjBcLzdMNmo3bUVTVFJtbGdGem1SQjIwX2xvZ28tYnJpenkucG5nIiwiciI6bnVsbCwiY20iOiIiLCJyZSI6Im51bGwiLCJwIjo2ODgzMzEsImNjIjp7IlVTRCI6IjE0OSIsIkdCUCI6IjE0OSIsIkVVUiI6IjE0OSJ9LCJ5IjoiIiwicSI6MSwiZCI6MSwiYSI6W10sInYiOiIzOTMyMCIsInMiOiI5Mzk2ODRkNDMyMGY1M2E3MDk2ZGMxNzJjZGY5MjAyYjVjNTExOWQxMmZjYWUyYmIxNTFkYjc2MjdjMmYwMjgzMmMyYWVmZDViYzViOTdlOGMwN2Q4NDM2ZDUzZDIwZmNhMjA3YjMwNDNmZDA0MWQ2Y2NhNzM1NjJjZGE0MGM1ZSJ9',coupon:bzcoupon,passthrough:bzprams});
+    } else if (pid == 688336) {
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgRnJlZWxhbmNlciBXb3JkUHJlc3MiLCJpIjoiaHR0cHM6XC9cL3BhZGRsZS5zMy5hbWF6b25hd3MuY29tXC91c2VyXC8zOTMyMFwvSXVtSnNRVGFSNU95M0RKZDRZTEhfbG9nby1icml6eS5wbmciLCJyIjpudWxsLCJjbSI6IiIsInJlIjoibnVsbCIsInAiOjY4ODMzNiwiY2MiOnsiVVNEIjoiMjk5IiwiR0JQIjoiMjk5IiwiRVVSIjoiMjk5In0sInkiOiIiLCJxIjoxLCJkIjoxLCJhIjpbXSwidiI6IjM5MzIwIiwicyI6ImYxZDNhMjVkZDg1MmI1YTdhOThhZTA1M2FhYjRkNWU4OWNkYzMxNzk0ZTJlYjEyNzE4OGY3NjdjZTM3MzY1NmZiOGM1OWRmODc5MDc3N2VmOGVjMzlkNzQ1NGI2NDU4YTYzNDFiM2FlMjg3ZmUwMzM5NTdmN2JhOWY4NzQwODBmIn0=',coupon:bzcoupon,passthrough:bzprams});
+    } else if (pid == 688339) {
+        //Paddle.Checkout.open({product:pid,quantity_variable:0,allowQuantity:0,override:'https://checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgQWdlbmN5IFdQIiwiaSI6Imh0dHBzOlwvXC93d3cuYnJpenkuaW9cL3BhZGRsZVwvbG9nby1icml6eS5wbmciLCJyIjpudWxsLCJjbSI6IiIsInJlIjowLCJwIjo2ODgzMzksImNjIjp7IlVTRCI6IjM5OSIsIkdCUCI6IjMxOSIsIkVVUiI6IjM0OSJ9LCJ5IjoiIiwicSI6MSwiZCI6MSwiYSI6eyIxNDU5OCI6IjAuMjUifSwidiI6IjM5MzIwIiwiZHciOmZhbHNlLCJzIjoiODk4ODUyYzFmYzg3ZGMwZmQzOWUzYzUwYTNjNzYyZTI0N2M5ZTdkYmRmYjM4ODFmYjQzMTZjYWExODAxZWFmYTBjNDdhMGJjMjEzZjI3MTllOTEzNDUzMDFhYTYxMWQ0NDQ5NDIwYTRlZDg1MGNjOGU1ZWEyNzQ2OGVmNWZhZjMifQ==',coupon:bzcoupon,passthrough:bzprams});
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgQWdlbmN5IFdvcmRQcmVzcyIsImkiOiJodHRwczpcL1wvcGFkZGxlLnMzLmFtYXpvbmF3cy5jb21cL3VzZXJcLzM5MzIwXC8ybm4zdE43T1F1VG9uUVp1bGxURl9sb2dvLWJyaXp5LnBuZyIsInIiOm51bGwsImNtIjoiIiwicmUiOiJudWxsIiwicCI6Njg4MzM5LCJjYyI6eyJVU0QiOiIzOTkiLCJHQlAiOiIzMTkiLCJFVVIiOiIzOTkifSwicSI6MSwiZCI6MSwiYSI6W10sInYiOiIzOTMyMCIsInMiOiI1YmJiYjQ2M2E2NTcwY2ZhM2U5YzY4NTBkZGIxZjE3Zjk0YTMxNzIxYzg2ZTc4ZTY1OWM0ZDE3MTg1YTIwZjBjODdjYmEyNWQ3OWEyOGJjYWYxODQxMGU3OGFhZjM4ZDhkMjVmZmVmNGE3ZmNjZmE5YTg2ZDgxMTJiMTU3MTFkYyJ9',coupon:bzcoupon,passthrough:bzprams});
+    } else if (pid == 688309) {
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgUGVyc29uYWwgQ2xvdWQiLCJpIjoiaHR0cHM6XC9cL3BhZGRsZS5zMy5hbWF6b25hd3MuY29tXC91c2VyXC8zOTMyMFwvc3Vic182ODgzMDlfaWNvbi5wbmciLCJyIjpudWxsLCJjbSI6IiIsInJlIjoibnVsbCIsInAiOjY4ODMwOSwiYWwiOjAsInkiOiIiLCJxIjowLCJkIjoxLCJhIjpbXSwidiI6IjM5MzIwIiwicyI6Ijc2MjhlNDMzMGM5ZDc1OGQ0YjQwN2QyZTVmNTQ4ZTgwZjIxZjdhYWZmNDA5MmY2NTgzOGY2NzQ4MjY1OGZiNTA3MWM3MzA1ZmQ4MTU2ZjM2NTczNWM5ZGFiNjdlM2ZjMWJjMjhmOGQxYjNjNjgxZDlhNWJiODI2ZjlhMzc2NjVjIn0=',coupon:bzcoupon,passthrough:bzprams, ...doupsell});
+    } else if (pid == 688313) {
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgRnJlZWxhbmNlciBDbG91ZCIsImkiOiJodHRwczpcL1wvcGFkZGxlLnMzLmFtYXpvbmF3cy5jb21cL3VzZXJcLzM5MzIwXC9zdWJzXzY4ODMxM19pY29uLnBuZyIsInIiOm51bGwsImNtIjoiIiwicmUiOiJudWxsIiwicCI6Njg4MzEzLCJhbCI6MCwieSI6IiIsInEiOjAsImQiOjEsImEiOltdLCJ2IjoiMzkzMjAiLCJzIjoiYzQ1ZmFiNjQyNTFlNmFlNmM1NTJiODM5ZmZiOWM2YTg1OWE5N2I2M2M1ZDVhMDVjMzM4M2JmZTI4YzQyZDA5ZWQ4YjBmNmIxYzhhMGU2YWQ2NTViNWE5ZGY5MzdhYzg5MGUwYTdiZDNkM2M2MzIwOTZhOGU1MjZhODcwMTkyMjQifQ==',coupon:bzcoupon,passthrough:bzprams, ...doupsell});
+    } else if (pid == 688316) {
+        //Paddle.Checkout.open({product:pid,quantity_variable:0,allowQuantity:0,success:'https://www.brizy.io/account/thanks',override:'https://checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgQWdlbmN5IENsb3VkIiwiaSI6Imh0dHBzOlwvXC93d3cuYnJpenkuaW9cL3BhZGRsZVwvbG9nby1icml6eS5wbmciLCJyIjpudWxsLCJjbSI6IiIsInJlIjowLCJwIjo2ODgzMTYsImFsIjowLCJ5IjoiIiwicSI6MCwiZCI6MSwiYSI6eyIxNDU5OCI6IjAuMjUifSwidiI6IjM5MzIwIiwiZHciOmZhbHNlLCJzIjoiZWEyMzljZjQzMTRhM2FmNjQzZGNlMWZkM2YzYTAwMWJiNGNlMDJlZWIyMGUyOTAwMDZlZTgxOTQwY2MzMDZmMzZhODg0ZTRhNTYwNTc5OGQ2ZWNhZjA1MTRjNDYxNjQ5MDIyZjg2NmNiNjMzZTIzOWRiOThiOThiYTg5ZDJiODEifQ==',coupon:bzcoupon,passthrough:bzprams});
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgQWdlbmN5IENsb3VkIiwiaSI6Imh0dHBzOlwvXC9wYWRkbGUuczMuYW1hem9uYXdzLmNvbVwvdXNlclwvMzkzMjBcL3N1YnNfNjg4MzE2X2ljb24ucG5nIiwiciI6bnVsbCwiY20iOiIiLCJyZSI6Im51bGwiLCJwIjo2ODgzMTYsImFsIjowLCJ5IjoiIiwicSI6MCwiZCI6MSwiYSI6W10sInYiOiIzOTMyMCIsInMiOiIyNTY1NjNhOWY4OWY5MGM0N2ZhMmE1NDQzZWQ2NDA1YjZiZThlZWJmOTQ4YWJlMzVjMWI2ZTg1ODAwN2NiYmQ4NGQ4MjlkZDU0YWYzNjg3YWJhNzMyNTg3Y2U5NTU2OWFjNGUwNTZiMWI3NDEzYWE2M2I3YTRmYjhlNTIyMmQ5ZSJ9',coupon:bzcoupon,passthrough:bzprams, ...doupsell});
+    } else if (pid == 688319) {
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgUGVyc29uYWwgQ2xvdWQiLCJpIjoiaHR0cHM6XC9cL3BhZGRsZS5zMy5hbWF6b25hd3MuY29tXC91c2VyXC8zOTMyMFwvc3Vic182ODgzMTlfaWNvbi5wbmciLCJyIjpudWxsLCJjbSI6IiIsInJlIjoibnVsbCIsInAiOjY4ODMxOSwiYWwiOjAsInkiOiIiLCJxIjowLCJkIjoxLCJhIjpbXSwidiI6IjM5MzIwIiwicyI6Ijk4MGFjMzJiODYxZWE4NTI1NWNiMjI5NjI4MTdhYzEzOGRhZmExOTZkZDA4NzBkMzY0N2JlYTFjOTRiYzcwYzljYzAwMDdhMGY0MDA3OTI1ZmVlOWUwNTcwNzI0NDg5NGIyYTc2ZTdmMmU5N2UyODg3Mzc1NzFmMmY4NTY3ZjYxIn0=',coupon:bzcoupon,passthrough:bzprams, ...doupsell});
+    } else if (pid == 688322) {
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgRnJlZWxhbmNlciBDbG91ZCIsImkiOiJodHRwczpcL1wvcGFkZGxlLnMzLmFtYXpvbmF3cy5jb21cL3VzZXJcLzM5MzIwXC9zdWJzXzY4ODMyMl9pY29uLnBuZyIsInIiOm51bGwsImNtIjoiIiwicmUiOiJudWxsIiwicCI6Njg4MzIyLCJhbCI6MCwieSI6IiIsInEiOjAsImQiOjEsImEiOltdLCJ2IjoiMzkzMjAiLCJzIjoiY2UxMTliNjM2NTk2YjllMTM3YmNhNjJlZGJlMTRhMDA4ODQyYmVkNGM2NGYyZTIzNGIxYmM2MjYxOWRkMGQxNDViZTgyMTM5N2Y2MWM2YTI5ZmJlOTk0NzBmOTBkNDViZTQ2YWQ1YTYyMTczYzYwZTg0MjkyYWUzZDlkZGZmM2QifQ==',coupon:bzcoupon,passthrough:bzprams, ...doupsell});
+    } else if (pid == 688326) {
+        //Paddle.Checkout.open({product:pid,quantity_variable:0,allowQuantity:0,success:'https://www.brizy.io/account/thanks',override:'https://checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgQWdlbmN5IENsb3VkIiwiaSI6Imh0dHBzOlwvXC93d3cuYnJpenkuaW9cL3BhZGRsZVwvbG9nby1icml6eS5wbmciLCJyIjpudWxsLCJjbSI6IiIsInJlIjowLCJwIjo2ODgzMjYsImFsIjowLCJ5IjoiIiwicSI6MCwiZCI6MSwiYSI6eyIxNDU5OCI6IjAuMjUifSwidiI6IjM5MzIwIiwiZHciOmZhbHNlLCJzIjoiMmRkNDdiODc3OGE0ZGE0MmE1ZDRkNDZlNzMwZTMwZTY0ZGQ0Mzg1YmJhNzFiMDI5ODQ1MmE3YWY4ODBjMDMyYmM4ZjMxN2NhYmZlZmUwMzBkNmE2ZDZkNTAyOTJmMTExMTIwNzkzZTYyYWM2M2U0ZWNhZWY2ZmYyOGI2NWIyOTcifQ==',coupon:bzcoupon,passthrough:bzprams});
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,override:'https://create-checkout.paddle.com/checkout/custom/eyJ0IjoiQnJpenkgQWdlbmN5IENsb3VkIiwiaSI6Imh0dHBzOlwvXC9wYWRkbGUuczMuYW1hem9uYXdzLmNvbVwvdXNlclwvMzkzMjBcL3N1YnNfNjg4MzI2X2ljb24ucG5nIiwiciI6bnVsbCwiY20iOiIiLCJyZSI6Im51bGwiLCJwIjo2ODgzMjYsImFsIjowLCJ5IjoiIiwicSI6MCwiZCI6MSwiYSI6W10sInYiOiIzOTMyMCIsInMiOiIxYzhkOWE4MTYxNGY0ZTZkYmYzYjg2MjhkNzNmZGI2NmQyOTMwNmI4MTcyNTYzNjdlNzlhZjU5MDk5MWFiOTRiZTBhNDg3OWUwN2RmYTFhMThlYTI1MzgzZWFlZjkyZWQ4MDllMzk0MDU4NmJlZjUzZjA5N2VjNDA0MWU2NmM5MyJ9',coupon:bzcoupon,passthrough:bzprams, ...doupsell});
+    } else {
+        Paddle.Checkout.open({product:pid,email:email,country:country,marketingConsent:marketingConsent,quantity_variable:0,allowQuantity:0,coupon:bzcoupon,passthrough:bzprams, ...doupsell});
+    }
+
+}
+
+function brz_pr_category(pid) {
+    pid = String(pid);
+    if (pid.split('coupon=')[1]) {pid = pid.split('?coupon=')[0];}
+    var cat = new Object();
+    var item_name = new Object();
+    switch (pid) {
+        case '688275':
+            item_name['688275'] = 'Brizy Personal WordPress';
+        case '688295':
+            item_name['688295'] = 'Brizy Freelancer WordPress';
+        case '688302':
+            item_name['688302'] = 'Brizy Agency WordPress';
+            cat['item_list_id'] = 'wordpress_yearly';
+            cat['item_list_name'] = 'WordPress Yearly';
+            cat['item_category'] = 'WordPress';
+            cat['item_category2'] = 'Yearly';
+            break;
+        case '688331':
+            item_name['688331'] = 'Brizy Personal WordPress';
+        case '688336':
+            item_name['688336'] = 'Brizy Freelancer WordPress';
+        case '688339':
+            item_name['688339'] = 'Brizy Agency WordPress';
+            cat['item_list_id'] = 'wordpress_ltd';
+            cat['item_list_name'] = 'WordPress LTD';
+            cat['item_category'] = 'WordPress';
+            cat['item_category2'] = 'LTD';
+            break;
+        case '688319':
+            item_name['688319'] = 'Brizy Personal Cloud';
+        case '688322':
+            item_name['688322'] = 'Brizy Freelancer Cloud';
+        case '688326':
+            item_name['688326'] = 'Brizy Agency Cloud';
+            cat['item_list_id'] = 'cloud_monthly';
+            cat['item_list_name'] = 'Cloud Monthly';
+            cat['item_category'] = 'Cloud';
+            cat['item_category2'] = 'Monthly';
+            break;
+        case '688309':
+            item_name['688309'] = 'Brizy Personal Cloud';
+        case '688313':
+            item_name['688313'] = 'Brizy Freelancer Cloud';
+        case '688316':
+            item_name['688316'] = 'Brizy Agency Cloud';
+            cat['item_list_id'] = 'cloud_yearly';
+            cat['item_list_name'] = 'Cloud Yearly';
+            cat['item_category'] = 'Cloud';
+            cat['item_category2'] = 'Yearly';
+            break;
+        case '764626':
+            item_name['764626'] = 'Personal Cloud LTD';
+        case '764628':
+            item_name['764628'] = 'Freelancer Cloud LTD';
+        case '764629':
+            item_name['764629'] = 'Agency Cloud LTD';
+            cat['item_list_id'] = 'cloud_ltd';
+            cat['item_list_name'] = 'Cloud LTD';
+            cat['item_category'] = 'Cloud';
+            cat['item_category2'] = 'LTD';
+            break;
+            default:
+                cat['item_list_id'] = 'wordpress_yearly';
+                item_name[pid] = 'Brizy Pro';
+    }
+    cat['item_name'] = item_name[pid];
+    return cat;
+}
+
+function wordpress_yearly() {
+    dataLayer.push({
+        event: 'view_item_list',
+        item_list_id: 'wordpress_yearly',
+        item_list_name: 'WordPress Yearly',
+        items: [
+            {
+                item_id: '688275',
+                item_name: 'Brizy Personal WordPress',
+                item_category: 'WordPress',
+                item_category2: 'Yearly',
+                currency: 'USD',
+                price: 49,
+                quantity: 1
+            },
+            {
+                item_id: '688295',
+                item_name: 'Brizy Freelancer WordPress',
+                item_category: 'WordPress',
+                item_category2: 'Yearly',
+                currency: 'USD',
+                price: 99,
+                quantity: 1
+            },
+            {
+                item_id: '688302',
+                item_name: 'Brizy Agency WordPress',
+                item_category: 'WordPress',
+                item_category2: 'Yearly',
+                currency: 'USD',
+                price: 199,
+                quantity: 1
+            }]
+    });
+}
+function wordpress_ltd() {
+    dataLayer.push({
+        event: 'view_item_list',
+        item_list_id: 'wordpress_ltd',
+        item_list_name: 'WordPress LTD',
+        items: [
+            {
+                item_id: '688331',
+                item_name: 'Brizy Personal WordPress',
+                item_category: 'WordPress',
+                item_category2: 'LTD',
+                currency: 'USD',
+                price: 149,
+                quantity: 1
+            },
+            {
+                item_id: '688336',
+                item_name: 'Brizy Freelancer WordPress',
+                item_category: 'WordPress',
+                item_category2: 'LTD',
+                currency: 'USD',
+                price: 299,
+                quantity: 1
+            },
+            {
+                item_id: '688339',
+                item_name: 'Brizy Agency WordPress',
+                item_category: 'WordPress',
+                item_category2: 'LTD',
+                currency: 'USD',
+                price: 399,
+                quantity: 1
+            }]
+    });
+}
+function cloud_monthly() {
+    dataLayer.push({
+        event: 'view_item_list',
+        item_list_id: 'cloud_monthly',
+        item_list_name: 'Cloud Monthly',
+        items: [
+            {
+                item_id: '688319',
+                item_name: 'Brizy Personal Cloud',
+                item_category: 'Cloud',
+                item_category2: 'Monthly',
+                currency: 'USD',
+                price: 9,
+                quantity: 1
+            },
+            {
+                item_id: '688322',
+                item_name: 'Brizy Freelancer Cloud',
+                item_category: 'Cloud',
+                item_category2: 'Monthly',
+                currency: 'USD',
+                price: 29,
+                quantity: 1
+            },
+            {
+                item_id: '688326',
+                item_name: 'Brizy Agency Cloud',
+                item_category: 'Cloud',
+                item_category2: 'Monthly',
+                currency: 'USD',
+                price: 49,
+                quantity: 1
+            }]
+    });
+}
+function cloud_yearly() {
+    dataLayer.push({
+        event: 'view_item_list',
+        item_list_id: 'cloud_yearly',
+        item_list_name: 'Cloud Yearly',
+        items: [
+            {
+                item_id: '688309',
+                item_name: 'Brizy Personal Cloud',
+                item_category: 'Cloud',
+                item_category2: 'Yearly',
+                currency: 'USD',
+                price: 79,
+                quantity: 1
+            },
+            {
+                item_id: '688313',
+                item_name: 'Brizy Freelancer Cloud',
+                item_category: 'Cloud',
+                item_category2: 'Yearly',
+                currency: 'USD',
+                price: 299,
+                quantity: 1
+            },
+            {
+                item_id: '688316',
+                item_name: 'Brizy Agency Cloud',
+                item_category: 'Cloud',
+                item_category2: 'Yearly',
+                currency: 'USD',
+                price: 499,
+                quantity: 1
+            }]
+    });
+}
+function cloud_ltd() {
+    dataLayer.push({
+        event: 'view_item_list',
+        item_list_id: 'cloud_ltd',
+        item_list_name: 'Cloud LTD',
+        items: [
+            {
+                item_id: '764626',
+                item_name: 'Personal Cloud LTD',
+                item_category: 'Cloud',
+                item_category2: 'LTD',
+                currency: 'USD',
+                price: 199,
+                quantity: 1
+            },
+            {
+                item_id: '764628',
+                item_name: 'Freelancer Cloud LTD',
+                item_category: 'Cloud',
+                item_category2: 'LTD',
+                currency: 'USD',
+                price: 749,
+                quantity: 1
+            },
+            {
+                item_id: '764629',
+                item_name: 'Agency Cloud LTD',
+                item_category: 'Cloud',
+                item_category2: 'LTD',
+                currency: 'USD',
+                price: 1499,
+                quantity: 1
+            }]
+    });
+}
+function brizy_add_affiliate() {
+    document.getElementById("affiliate").value = "";
+    document.getElementById("affiliate_keyword").value = "";
+}
+//</script>
+
+
+

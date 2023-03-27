@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="44" height="44" viewBox="0 0 44 44">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.047" y1="-0.216" x2="1.029" y2="1.171" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#7bd8fe"/>
+      <stop offset="1" stop-color="#3d3ac4"/>
+    </linearGradient>
+  </defs>
+  <path id="Artciles" d="M5,44a5,5,0,0,1-5-4.783L0,39V22H5v2H2V39a3,3,0,0,0,2.824,3L5,42a3,3,0,0,0,3-3V0H44V39a5.005,5.005,0,0,1-5,5Zm5-5a4.969,4.969,0,0,1-.941,2.92L9,42H39a3,3,0,0,0,2.994-2.824L42,39V2H10Zm5-5V32H37v2Zm0-8V24H37v2Zm22-8H15V8H37V18h0ZM17,16H35V10H17Z" fill="url(#linear-gradient)"/>
+</svg>

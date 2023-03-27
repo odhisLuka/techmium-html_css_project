@@ -1,0 +1,26 @@
+.header{
+  background-color: black
+}
+.container{
+  display: flex;
+}
+.header-logo{
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.navbar-menu{
+  flex: 2;
+}
+.nav{
+  display: flex;
+}
+.nav-item{
+  margin: 8px;
+}
+li > a{
+  font-size: 16px;
+  text-decoration: none;
+  color: white;
+}

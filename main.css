@@ -1,0 +1,152 @@
+/* css for hero-section*/
+.section-hero{
+  background-color: black;
+  padding-bottom: 50px;
+}
+.section-inner{
+  display: block;
+  margin-left: 134px;
+}
+.section-inner > .section-title{
+  color: white;
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+.button{
+  color: white;
+  font-size: 12px;
+  text-decoration: none;
+  border: solid 1px red;
+  padding: 10px;
+}
+
+#services, #latest_news, #contact{
+  background-color: azure;
+  padding-bottom: 50px;
+}
+.section-header{
+  margin-bottom: 25px;
+}
+.section-title{
+  font-size: 36px;
+  margin-bottom: 0;
+  text-align: center;
+}
+.section-tagline{
+  font-size: 12px;
+  margin-top: 0;
+  text-align: center;
+  color: red;
+  font-weight: 600;
+}
+
+.section > .container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.row{
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.card-services{
+  width: 280px;
+  background-color: rgb(231, 231, 231);
+  margin: 5px;
+  padding: 1px;
+}
+.card-title > a{
+  margin-left: 15px;
+}
+a{
+  color: black;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/*css for Works section*/
+#works .section-title{
+  color: white;
+}
+#works{
+  background-color: black;
+}
+.card-outer{
+  margin: 5px;
+}
+
+/*css for about us section*/
+#about, #testimonials{
+  padding-bottom: 40px;
+  background-color: aliceblue;
+}
+#about .section-body > .row{
+  display: flex;
+  padding: 0 170px 170px; 
+  padding-bottom: 50px;
+}
+#about .container .section-body .row > img{
+  vertical-align: top;
+}
+#about .container .section-footer > .button{
+  border: solid 1px red;
+  color: black;
+}
+
+/*css for latest news section*/
+#latest_news .section-body .row{
+  display: flex;
+  padding: 0 170px 170px;
+  padding-bottom: 50px;
+} 
+#latest_news .section-body .row .col-1-3{
+  margin: 6px;
+  
+}
+
+/*css for testimonials*/
+#testimonials .section-body .row{
+  display: flex;
+  padding: 0 170px 170px;
+  padding-bottom: 50px;
+} 
+#testimonials .section-body .row .col-1-3{
+  margin: 6px;
+}
+.card-testimonial{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-testimonial img{
+  border-radius: 50px;
+}
+.card-quote{
+  text-align: center;
+  line-height: 1.5rem;
+}
+cite{
+  line-height: 3;
+  color: red;
+}
+
+/*css for contact section*/
+#contact{
+  padding-bottom: 60px;
+}
+#contact .container .section-body p{
+  text-align: center;
+  margin-bottom: 50px;
+}
+#contact .container .section-footer > .button{
+  color: black;
+  font-size: 12px;
+  text-decoration: none;
+  border: solid 1px red;
+  padding: 10px;
+}
