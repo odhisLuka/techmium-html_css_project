@@ -1,0 +1,33 @@
+#contactForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+#contactForm label {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+#contactForm input {
+  padding: 10px;
+  font-size: 14px;
+}
+
+#contactForm button {
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#contactForm button:hover {
+  background-color: #0056b3;
+}

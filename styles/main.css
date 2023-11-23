@@ -139,9 +139,11 @@ cite{
 #contact{
   padding-bottom: 60px;
 }
-#contact .container .section-body p{
+#contact .container .section-body div{
   text-align: center;
+  /* height: 100px; */
   margin-bottom: 50px;
+  /* background-color: red; */
 }
 #contact .container .section-footer > .button{
   color: black;
